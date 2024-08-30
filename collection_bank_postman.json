@@ -1,0 +1,236 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Account",
+    "collectionId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+    "dateExported": "2024-08-30T17:35:44.476Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "053be52f-0732-457d-b079-adfc8b0e8eb1",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "GET ALL Accounts",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/accounts",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-08-30T15:43:13.748Z",
+            "modified": "2024-08-30T15:43:13.748Z",
+            "headers": []
+        },
+        {
+            "_id": "ebd7ed0b-f06a-449a-aff5-fe5ae1c7aa25",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "POST Account",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/accounts",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-08-30T15:43:26.316Z",
+            "modified": "2024-08-30T16:54:14.425Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"number\": \"123\",\n  \"type\": \"222\",\n  \"initialAmount\": 100.0,\n  \"isActive\": true,\n  \"clientId\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "59918f64-f866-428b-ac6e-55f36448502c",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "PUT Account",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/accounts/1",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-08-30T15:43:35.460Z",
+            "modified": "2024-08-30T15:43:35.460Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 1,\n  \"number\": \"123\",\n  \"type\": \"244\",\n  \"initialAmount\": 4000.0,\n  \"isActive\": true,\n  \"clientId\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "04c6df0a-b9ea-425f-8935-d3ee064c74ab",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "DELETE Account",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/accounts/1",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-08-30T15:43:40.982Z",
+            "modified": "2024-08-30T15:43:40.982Z",
+            "headers": []
+        },
+        {
+            "_id": "bba65612-a1a5-48b1-86ba-54d76f766ed3",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "PATCH Account",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/accounts/1",
+            "method": "PATCH",
+            "sortNum": 50000,
+            "created": "2024-08-30T15:43:49.794Z",
+            "modified": "2024-08-30T15:43:49.794Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"isActive\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "b5957963-ff90-460e-bf17-2cc6f73a0f2b",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "GET Account",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/accounts/1",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-08-30T15:43:54.372Z",
+            "modified": "2024-08-30T15:43:54.372Z",
+            "headers": []
+        },
+        {
+            "_id": "32b7a217-8655-4f44-a418-599cff54340c",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "GET ALL Transactions",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/transactions",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-08-30T17:35:22.028Z",
+            "modified": "2024-08-30T17:35:22.028Z",
+            "headers": []
+        },
+        {
+            "_id": "46404e2d-8c53-4a28-bad3-56ccff142a2e",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "GET Report",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/transactions/clients/{clientId}/report?dateTransactionStart=2020-01-01&dateTransactionEnd=2024-01-01",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-08-30T17:35:23.998Z",
+            "modified": "2024-08-30T17:35:23.998Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "clientId",
+                    "value": "1",
+                    "isPath": true
+                },
+                {
+                    "name": "dateTransactionStart",
+                    "value": "2020-01-01",
+                    "isPath": false
+                },
+                {
+                    "name": "dateTransactionEnd",
+                    "value": "2024-01-01",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ebf348ef-656b-4d79-a11f-06c61dd87ca0",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "POST Transaction",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/transactions",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-08-30T17:35:26.234Z",
+            "modified": "2024-08-30T17:35:26.234Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"date\": \"2024-08-30\",\n  \"type\": \"some type\",\n  \"amount\": \"-111\",\n  \"balance\": \"10\",\n  \"accountId\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e1f487de-8c2b-44e5-8c88-269faaf4376f",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "GET ALL Client",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/clients",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-08-30T17:35:29.805Z",
+            "modified": "2024-08-30T17:35:29.805Z",
+            "headers": []
+        },
+        {
+            "_id": "0ebcd256-e950-4672-bb77-37b5f6ffd1b7",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "POST Client",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/clients",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-08-30T17:35:32.075Z",
+            "modified": "2024-08-30T17:35:32.075Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"dni\": \"123\",\n  \"name\": \"name\",\n  \"password\": \"pass\",\n  \"gender\": \"Male\",\n  \"age\": 30,\n  \"address\": \"Av. 123\",\n  \"phone\": \"12132323\",\n  \"isActive\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "3f50be84-5e02-4c07-b166-3f8d4d5512ca",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "PUT Client",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/clients/1",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2024-08-30T17:35:33.347Z",
+            "modified": "2024-08-30T17:35:33.347Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 1,\n  \"dni\": \"123\",\n  \"name\": \"name\",\n  \"password\": \"pass\",\n  \"gender\": \"Male\",\n  \"age\": 30,\n  \"address\": \"Av. 123\",\n  \"phone\": \"12132323\",\n  \"isActive\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "3a184b94-d4df-4d50-b600-c92a15b16907",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "PATCH Client",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/clients/1",
+            "method": "PATCH",
+            "sortNum": 130000,
+            "created": "2024-08-30T17:35:35.886Z",
+            "modified": "2024-08-30T17:35:35.886Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"isActive\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d758ce8f-6747-4375-b3e7-c9b6049aaa0b",
+            "colId": "667e57ec-5e9b-4859-9c59-e29b665f5c0f",
+            "containerId": "",
+            "name": "DELETE Client",
+            "url": "https://he-ide.hackerearth.com/1c766132d49a49eeabee38d848a9c6fd/api/clients/1",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2024-08-30T17:35:37.784Z",
+            "modified": "2024-08-30T17:35:37.784Z",
+            "headers": []
+        }
+    ],
+    "ref": "qJR4Igi2a5sk5SU5X3auVTS-U9q2d0qtKvtntSmPKDYiITxNqI_AyZNZlVHZICbQV5eCkdqHKsRsaIK2NFMeMA"
+}
