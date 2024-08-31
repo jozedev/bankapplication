@@ -34,6 +34,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto create(AccountDto accountDto) {
         // Create account
+        accountDto.setBalance(accountDto.getInitialAmount());
 		return mapToDto(accountRepository.save(mapFromDto(accountDto)));
     }
 
@@ -63,6 +64,7 @@ public class AccountServiceImpl implements AccountService {
         account.setNumber(accountDto.getNumber());
         account.setType(accountDto.getType());
         account.setInitialAmount(accountDto.getInitialAmount());
+        account.setBalance(accountDto.getBalance());
         account.setActive(accountDto.isActive());
         account.setClientId(accountDto.getClientId());
 
@@ -71,6 +73,7 @@ public class AccountServiceImpl implements AccountService {
     
     private AccountDto mapToDto(Account account) {
         return new AccountDto(account.getId(), account.getNumber(), account.getType(), 
-                account.getInitialAmount(), account.isActive(), account.getClientId());
+                account.getInitialAmount(), account.getBalance(), account.isActive(),
+                account.getClientId());
     }
 }

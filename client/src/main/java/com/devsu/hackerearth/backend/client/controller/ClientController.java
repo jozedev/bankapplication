@@ -70,6 +70,6 @@ public class ClientController {
 		// api/clients/{id}
 		// Delete client
 		clientService.deleteById(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT);
+		return ResponseEntity.noContent().build();
 	}
 }

@@ -60,12 +60,12 @@ public class AccountController {
 		return ResponseEntity.ok(accountService.partialUpdate(id, partialAccountDto));
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		// api/accounts/{id}
 		// Delete accounts
 		accountService.deleteById(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT);
+		return ResponseEntity.noContent().build();
 	}
 }
 

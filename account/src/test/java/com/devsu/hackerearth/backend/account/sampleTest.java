@@ -21,8 +21,8 @@ public class sampleTest {
 	@Test
 	void createAccountTest() {
 		// Arrange
-		AccountDto newAccount = new AccountDto(1L, "number", "savings", 0.0, true, 1L);
-		AccountDto createdAccount = new AccountDto(1L, "number", "savings", 0.0, true, 1L);
+		AccountDto newAccount = new AccountDto(1L, "number", "savings", 0.0, 0.0,true, 1L);
+		AccountDto createdAccount = new AccountDto(1L, "number", "savings", 0.0, 0.0,true, 1L);
 		when(accountService.create(newAccount)).thenReturn(createdAccount);
 
 		// Act

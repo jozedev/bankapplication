@@ -1,5 +1,6 @@
 package com.devsu.hackerearth.backend.account.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,10 +14,9 @@ import lombok.Setter;
 @Setter
 public class Transaction extends Base {
 
-	private Date date;
+	private LocalDateTime date;
 	private String type;
 	private double amount;
-	private double balance;
 
 	@Column(name = "account_id")
 	private Long accountId;

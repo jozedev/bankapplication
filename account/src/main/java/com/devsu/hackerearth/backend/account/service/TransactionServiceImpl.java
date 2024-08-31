@@ -1,30 +1,33 @@
 package com.devsu.hackerearth.backend.account.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.devsu.hackerearth.backend.account.exception.AccountNotActiveException;
+import com.devsu.hackerearth.backend.account.model.dto.AccountDto;
 import org.springframework.stereotype.Service;
 
-import com.devsu.hackerearth.backend.account.model.dto.AccountDto;
 import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
 import com.devsu.hackerearth.backend.account.model.dto.TransactionDto;
 import com.devsu.hackerearth.backend.account.repository.TransactionRepository;
 import com.devsu.hackerearth.backend.account.repository.AccountRepository;
 import com.devsu.hackerearth.backend.account.model.Transaction;
 import com.devsu.hackerearth.backend.account.model.Account;
-import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
 import com.devsu.hackerearth.backend.account.exception.NotAvailableBalanceException;
+
+import javax.transaction.Transactional;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
-    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountService accountService) {
         this.transactionRepository = transactionRepository;
-        this.accountRepository = accountRepository;
+        this.accountService = accountService;
     }
 
     @Override
@@ -40,25 +43,31 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional
     public TransactionDto create(TransactionDto transactionDto) {
         // Create transaction
-        Account account = accountRepository.getOne(transactionDto.getAccountId());
-        account.setInitialAmount(account.getInitialAmount() + transactionDto.getAmount());
+        AccountDto account = accountService.getById(transactionDto.getAccountId());
+        account.setBalance(account.getBalance() + transactionDto.getAmount());
 
-        if (account.getInitialAmount() < 0) {
+        if (!account.isActive()) {
+            throw new AccountNotActiveException("The account isn't active.");
+        }
+
+        if (account.getBalance() < 0) {
             throw new NotAvailableBalanceException("The account doesn't have enough money for the transaction.");
         }
 
-        accountRepository.save(account);
+        accountService.update(account);
 
         return mapToDto(transactionRepository.save(mapFromDto(transactionDto)));
     }
 
     @Override
-    public List<BankStatementDto> getAllByAccountClientIdAndDateBetween(Long clientId, Date dateTransactionStart,
-            Date dateTransactionEnd) {
+    public List<BankStatementDto> getAllByAccountClientIdAndDateBetween(Long clientId,
+                                                                        LocalDateTime dateTransactionStart,
+                                                                        LocalDateTime dateTransactionEnd) {
         // Report
-        Account account = accountRepository.findByClientId(clientId);
+        AccountDto account = accountService.getById(clientId);
         return transactionRepository.findByAccountId(clientId, dateTransactionStart, dateTransactionEnd)
                 .stream().map(t -> this.mapToBankStatementDto(account, t)).collect(Collectors.toList());
     }
@@ -75,7 +84,6 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setDate(transactionDto.getDate());
         transaction.setType(transactionDto.getType());
         transaction.setAmount(transactionDto.getAmount());
-        transaction.setBalance(transactionDto.getBalance());
         transaction.setAccountId(transactionDto.getAccountId());
 
         return transaction;
@@ -83,12 +91,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     private TransactionDto mapToDto(Transaction transaction) {
         return new TransactionDto(transaction.getId(), transaction.getDate(), transaction.getType(),
-                transaction.getAmount(), transaction.getBalance(), transaction.getAccountId());
+                transaction.getAmount(), transaction.getAccountId());
     }
 
-    private BankStatementDto mapToBankStatementDto(Account account, Transaction transaction) {
+    private BankStatementDto mapToBankStatementDto(AccountDto account, Transaction transaction) {
         return new BankStatementDto(transaction.getDate(), "client", account.getNumber(), account.getType(),
                 account.getInitialAmount(), account.isActive(), transaction.getType(), transaction.getAmount(),
-                transaction.getBalance());
+                account.getBalance());
     }
 }

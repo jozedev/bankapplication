@@ -13,6 +13,7 @@ public class Account extends Base {
     private String number;
 	private String type;
 	private double initialAmount;
+    private double balance;
 	private boolean isActive;
 
     @Column(name = "client_id")

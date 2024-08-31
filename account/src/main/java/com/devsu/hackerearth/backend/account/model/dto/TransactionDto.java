@@ -1,5 +1,6 @@
 package com.devsu.hackerearth.backend.account.model.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -10,9 +11,8 @@ import lombok.Data;
 public class TransactionDto {
 
 	private Long id;
-    private Date date;
+    private LocalDateTime date;
 	private String type;
 	private double amount;
-	private double balance;
 	private Long accountId;
 }

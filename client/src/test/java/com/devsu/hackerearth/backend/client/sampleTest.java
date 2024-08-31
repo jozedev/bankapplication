@@ -3,6 +3,7 @@ package com.devsu.hackerearth.backend.client;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+import com.devsu.hackerearth.backend.client.model.dto.PartialClientDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -41,10 +42,10 @@ public class sampleTest {
     void getOneTest() {
         // Arrange
         ClientDto client = new ClientDto(1L, "Dni", "Name", "Password", "Gender", 1, "Address", "9999999999", true);
-        when(clientService.getAll(1)).thenReturn(client);
+        when(clientService.getById(1L)).thenReturn(client);
 
         // Act
-        ResponseEntity<ClientDto> response = clientController.get(1);
+        ResponseEntity<ClientDto> response = clientController.get(1L);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -69,12 +70,11 @@ public class sampleTest {
     @Test
     void updateClient() {
         // Arrange
-        ClientDto oldClient = new ClientDto(1L, "Dni", "Name", "Password", "Gender", 1, "Address", "9999999999", true);
         ClientDto newClient = new ClientDto(1L, "Dni", "Name", "Password", "Gender", 2, "Address", "9999999999", true);
-        when(clientService.update(oldClient)).thenReturn(newClient);
+        when(clientService.update(newClient)).thenReturn(newClient);
 
         // Act
-        ResponseEntity<ClientDto> response = clientController.update(newClient);
+        ResponseEntity<ClientDto> response = clientController.update(1L, newClient);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -90,7 +90,7 @@ public class sampleTest {
         when(clientService.partialUpdate(oldClient.getId(), partialClientDto)).thenReturn(newClient);
 
         // Act
-        ResponseEntity<ClientDto> response = clientController.partialUpdate(oldClient.getId(), partialClientDto));
+        ResponseEntity<ClientDto> response = clientController.partialUpdate(oldClient.getId(), partialClientDto);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -100,7 +100,7 @@ public class sampleTest {
     @Test
     void delete() {
         // Act
-        ResponseEntity<ClientDto> response = clientController.delete(1);
+        ResponseEntity<Void> response = clientController.delete(1L);
 
         // Assert
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());

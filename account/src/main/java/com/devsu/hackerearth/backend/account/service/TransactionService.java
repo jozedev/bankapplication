@@ -1,5 +1,6 @@
 package com.devsu.hackerearth.backend.account.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,6 @@ public interface TransactionService {
     public List<TransactionDto> getAll();
 	public TransactionDto getById(Long id);
 	public TransactionDto create(TransactionDto transactionDto);
-    public List<BankStatementDto> getAllByAccountClientIdAndDateBetween(Long clientId, @Param("dateTransactionStart") Date dateTransactionStart, @Param("dateTransactionEnd") Date dateTransactionEnd);
+    public List<BankStatementDto> getAllByAccountClientIdAndDateBetween(Long clientId, @Param("dateTransactionStart") LocalDateTime dateTransactionStart, @Param("dateTransactionEnd") LocalDateTime dateTransactionEnd);
     public TransactionDto getLastByAccountId(Long accountId);
 }

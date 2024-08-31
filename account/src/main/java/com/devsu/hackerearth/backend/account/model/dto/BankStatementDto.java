@@ -1,5 +1,6 @@
 package com.devsu.hackerearth.backend.account.model.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class BankStatementDto {
     
-	private Date date;
+	private LocalDateTime date;
 	private String client;
 	private String accountNumber;
 	private String accountType;
