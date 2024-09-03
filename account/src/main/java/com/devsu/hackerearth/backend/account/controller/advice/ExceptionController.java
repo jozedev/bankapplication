@@ -1,6 +1,7 @@
 package com.devsu.hackerearth.backend.account.controller.advice;
 
 import com.devsu.hackerearth.backend.account.exception.AccountNotActiveException;
+import com.devsu.hackerearth.backend.account.exception.ClientServiceException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,23 @@ public class ExceptionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cuenta no esta activa");
     }
 
+    @ExceptionHandler(ClientServiceException.class)
+    public ResponseEntity<String> catchClientServiceException(ClientServiceException exception) {
+        return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body("Ocurrión un error al contactar con el servicio de clientes");
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> catchEntityNotFoundException(EntityNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Couldn't find the requested resource");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo encontrar el recurso solicitado");
     }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<String> catchEmptyResultDataAccessException(EmptyResultDataAccessException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Couldn't find the requested resource");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo encontrar el recurso solicitado");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> catchException(Exception exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrión un error inesperado");
     }
 }

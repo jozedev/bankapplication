@@ -8,12 +8,14 @@ import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
 import com.devsu.hackerearth.backend.account.model.dto.TransactionDto;
 import com.devsu.hackerearth.backend.account.repository.TransactionRepository;
 import com.devsu.hackerearth.backend.account.service.AccountService;
+import com.devsu.hackerearth.backend.account.service.ServiceClient;
 import com.devsu.hackerearth.backend.account.service.TransactionService;
 import com.devsu.hackerearth.backend.account.service.TransactionServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ public class TransactionServiceTests {
 
     private TransactionRepository transactionRepository = mock(TransactionRepository.class);
     private AccountService accountService = mock(AccountService.class);
-    private TransactionService transactionService = new TransactionServiceImpl(transactionRepository, accountService);
+    private ServiceClient serviceClient = mock(ServiceClient.class);
+    private TransactionService transactionService = new TransactionServiceImpl(transactionRepository,
+            accountService, serviceClient);
 
     @Test
     @DisplayName("Test when account is not active it should throw an exception")

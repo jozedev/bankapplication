@@ -1,20 +1,21 @@
 package com.devsu.hackerearth.backend.account.service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.devsu.hackerearth.backend.account.exception.AccountNotActiveException;
+import com.devsu.hackerearth.backend.account.exception.ClientServiceException;
 import com.devsu.hackerearth.backend.account.model.dto.AccountDto;
+import com.devsu.hackerearth.backend.account.model.dto.ClientDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.devsu.hackerearth.backend.account.model.dto.BankStatementDto;
 import com.devsu.hackerearth.backend.account.model.dto.TransactionDto;
 import com.devsu.hackerearth.backend.account.repository.TransactionRepository;
-import com.devsu.hackerearth.backend.account.repository.AccountRepository;
 import com.devsu.hackerearth.backend.account.model.Transaction;
-import com.devsu.hackerearth.backend.account.model.Account;
 import com.devsu.hackerearth.backend.account.exception.NotAvailableBalanceException;
 
 import javax.transaction.Transactional;
@@ -24,10 +25,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final AccountService accountService;
+    private final ServiceClient serviceClient;
 
-    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountService accountService) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository,
+                                  AccountService accountService,
+                                  ServiceClient serviceClient) {
         this.transactionRepository = transactionRepository;
         this.accountService = accountService;
+        this.serviceClient = serviceClient;
     }
 
     @Override
@@ -68,8 +73,14 @@ public class TransactionServiceImpl implements TransactionService {
                                                                         LocalDateTime dateTransactionEnd) {
         // Report
         AccountDto account = accountService.getById(clientId);
+        ResponseEntity<ClientDto> responseClient = serviceClient.getForEntity("client-info",
+                ClientDto.class, clientId);
+        if (responseClient.getStatusCode() != HttpStatus.OK) {
+            throw new ClientServiceException("No se pudo contactar con el servicio de clientes");
+        }
+
         return transactionRepository.findByAccountId(clientId, dateTransactionStart, dateTransactionEnd)
-                .stream().map(t -> this.mapToBankStatementDto(account, t)).collect(Collectors.toList());
+                .stream().map(t -> this.mapToBankStatementDto(account, t, responseClient.getBody())).collect(Collectors.toList());
     }
 
     @Override
@@ -94,8 +105,8 @@ public class TransactionServiceImpl implements TransactionService {
                 transaction.getAmount(), transaction.getAccountId());
     }
 
-    private BankStatementDto mapToBankStatementDto(AccountDto account, Transaction transaction) {
-        return new BankStatementDto(transaction.getDate(), "client", account.getNumber(), account.getType(),
+    private BankStatementDto mapToBankStatementDto(AccountDto account, Transaction transaction, ClientDto client) {
+        return new BankStatementDto(transaction.getDate(), client.getName(), account.getNumber(), account.getType(),
                 account.getInitialAmount(), account.isActive(), transaction.getType(), transaction.getAmount(),
                 account.getBalance());
     }

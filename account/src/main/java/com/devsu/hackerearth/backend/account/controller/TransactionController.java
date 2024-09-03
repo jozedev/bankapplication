@@ -51,8 +51,8 @@ public class TransactionController {
 
 	@GetMapping("/clients/{clientId}/report")
     public ResponseEntity<List<BankStatementDto>> report(@PathVariable Long clientId,
-														 @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateTransactionStart,
-														 @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime dateTransactionEnd) {
+														 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTransactionStart,
+														 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTransactionEnd) {
 		// api/transactions/clients/{clientId}/report
         // Get report
 		return ResponseEntity.ok(transactionService.getAllByAccountClientIdAndDateBetween(clientId, dateTransactionStart, dateTransactionEnd));

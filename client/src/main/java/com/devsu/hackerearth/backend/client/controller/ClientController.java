@@ -65,7 +65,7 @@ public class ClientController {
 		return ResponseEntity.ok(clientService.partialUpdate(id, partialClientDto));
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		// api/clients/{id}
 		// Delete client
